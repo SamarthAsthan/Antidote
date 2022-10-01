@@ -15,29 +15,7 @@ final GlobalKey<ScaffoldState> _key = GlobalKey();
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _key, // Assign the key to Scaffold.
-      appBar: AppBar(
-        title: const Text(
-          "Antidote",
-          style: TextStyle(color: Colors.white),
-        ),
-        elevation: 0,
-        backgroundColor: Colors.deepPurple,
-      ),
-      drawer: const Drawer(),
-      body: const HomeBody(),
-    );
-  }
-}
-
-class HomeBody extends StatelessWidget {
-  const HomeBody({super.key});
-
-  @override
-  Widget build(BuildContext context) {
     return FutureBuilder(
-      
       future: ReadJsonData(),
       builder: (context, data) {
         if (data.hasError) {
@@ -47,7 +25,6 @@ class HomeBody extends StatelessWidget {
         } else if (data.hasData) {
           var items = data.data as List<NotificationsDataModel>;
           return ListView.builder(
-            
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
             itemCount: items.length,
