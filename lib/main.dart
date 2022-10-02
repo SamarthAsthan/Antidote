@@ -1,14 +1,18 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:antidote/screens/notificationspage.dart';
+import 'package:antidote/screens/signinpage.dart';
 import 'package:antidote/sheets/complaintsheet.dart';
 import 'package:antidote/widgets/navigationdrawer.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   await UserSheetApi.init();
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -16,22 +20,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.deepPurple),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            "Notifications",
-            style: TextStyle(color: Colors.black),
-          ),
-          elevation: 0,
-          backgroundColor: Colors.white,
-          iconTheme: IconThemeData(color: Colors.deepPurple),
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    bool isLoggedIn = FirebaseAuth.instance.currentUser != null ? true : false;
+    if (isLoggedIn) {
+      return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: HomePage(
+          user: user!,
         ),
-        body: const HomePage(),
-        drawer: const NavigationDrawer(),
-      ),
-    );
+      );
+    } else {
+      return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: SignInScreen(),
+      );
+    }
   }
 }

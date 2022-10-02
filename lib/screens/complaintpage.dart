@@ -16,9 +16,9 @@ class ComplaintsPage extends StatelessWidget {
           "Complaints",
           style: TextStyle(color: Colors.black),
         ),
-        iconTheme: const IconThemeData(color: Colors.deepPurple),
+        iconTheme: const IconThemeData(color: Colors.blue),
       ),
-      drawer: const NavigationDrawer(),
+      drawer: NavigationDrawer(),
       body: ComplaintBody(),
     );
   }

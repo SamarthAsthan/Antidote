@@ -30,8 +30,8 @@ class newlist extends StatelessWidget {
                     border: new Border(
                         right:
                             new BorderSide(width: 1.0, color: Colors.white24))),
-                child: Icon(Icons.notifications_none_rounded,
-                    color: Colors.deepPurple),
+                child:
+                    Icon(Icons.notifications_none_rounded, color: Colors.blue),
               ),
               title: Text(
                 "$title ",

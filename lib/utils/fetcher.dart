@@ -12,7 +12,7 @@ Future<List<NotificationsDataModel>> ReadJsonData() async {
   var response = await http.get(Uri.parse(urlNotifications));
   if (response.statusCode == 200) {
     var listNews = json.decode(response.body) as List<dynamic>;
-    print(listNews.length);
+    //print(listNews.length);
     return listNews.map((e) => NotificationsDataModel.fromJson(e)).toList();
   } else {
     return newsList;

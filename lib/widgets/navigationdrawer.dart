@@ -4,6 +4,8 @@ import 'package:antidote/main.dart';
 import 'package:antidote/screens/complaintpage.dart';
 import 'package:antidote/screens/messmenupage.dart';
 import 'package:antidote/screens/settingpage.dart';
+import 'package:antidote/screens/signinpage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class NavigationDrawer extends StatelessWidget {
@@ -25,25 +27,27 @@ class NavigationDrawer extends StatelessWidget {
   }
 
   Widget buildHeader(BuildContext context) {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
     return Container(
-      color: Colors.deepPurple,
+      color: Colors.blue,
       child: Column(
-        children: const [
+        children: [
           CircleAvatar(
             radius: 52,
-            backgroundImage:
-                NetworkImage("https://picsum.photos/200/300?random=1"),
+            backgroundImage: NetworkImage('${user?.photoURL}'),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Text(
-            "Ranga Rajan",
+            '${user?.displayName}',
             textAlign: TextAlign.center,
+            // ignore: prefer_const_constructors
             style: TextStyle(
                 color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           Text(
-            "ranga.rajan2021@vitstudent.ac.in",
+            '${user?.email}',
             style: TextStyle(color: Colors.white),
           ),
         ],
@@ -109,6 +113,22 @@ class NavigationDrawer extends StatelessWidget {
             leading: const Icon(Icons.bug_report_rounded),
             title: const Text("Bug Report"),
             onTap: () {},
+          ),
+          ListTile(
+            leading: const Icon(Icons.logout_rounded),
+            title: const Text("Log Out"),
+            onTap: () async {
+              Future<SignInScreen> _signOut() async {
+                await FirebaseAuth.instance.signOut();
+
+                return new SignInScreen();
+              }
+
+              _signOut();
+              //Navigator.pop(context);
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => SignInScreen()));
+            },
           )
         ],
       ),

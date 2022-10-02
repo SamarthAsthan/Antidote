@@ -10,7 +10,7 @@ class Settings extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Settings"),
       ),
-      drawer: const NavigationDrawer(),
+      drawer: NavigationDrawer(),
       body: SettingsBody(),
     );
   }

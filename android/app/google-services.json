@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "595595748637",
+    "project_id": "antidote-dca7e",
+    "storage_bucket": "antidote-dca7e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:595595748637:android:98194623e8332eade46df4",
+        "android_client_info": {
+          "package_name": "com.samarth.antidote"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "595595748637-qftbu1mmejdapcvodnl40rcscqvdmk6l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDt5YHFKjic9SAPKosqJiOOfSqQaGPscYg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "595595748637-qftbu1mmejdapcvodnl40rcscqvdmk6l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
