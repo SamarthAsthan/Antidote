@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_new
 
+import 'package:antidote/constants.dart';
 import 'package:antidote/widgets/notificationbody.dart';
 import 'package:flutter/material.dart';
 
@@ -30,8 +31,8 @@ class newlist extends StatelessWidget {
                     border: new Border(
                         right:
                             new BorderSide(width: 1.0, color: Colors.white24))),
-                child:
-                    Icon(Icons.notifications_none_rounded, color: Colors.blue),
+                child: Icon(Icons.notifications_none_rounded,
+                    color: myColors().themeColor),
               ),
               title: Text(
                 "$title ",
@@ -46,8 +47,8 @@ class newlist extends StatelessWidget {
                   // ignore: prefer_const_literals_to_create_immutables
                   children: <Widget>[
                     Container(
-                      width: 7,
-                      height: 7,
+                      width: 8,
+                      height: 8,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: Colors.red,
@@ -56,7 +57,7 @@ class newlist extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 3),
                       child: Text("Important",
-                          style: TextStyle(color: Colors.black)),
+                          style: TextStyle(color: Colors.black, fontSize: 15)),
                     )
                   ],
                 ),

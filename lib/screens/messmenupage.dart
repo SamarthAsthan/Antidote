@@ -1,3 +1,4 @@
+import 'package:antidote/constants.dart';
 import 'package:antidote/widgets/navigationdrawer.dart';
 import 'package:flutter/material.dart';
 
@@ -9,12 +10,13 @@ class MessMenu extends StatelessWidget {
     // ignore: prefer_const_constructors
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           "Mess Menu",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: myColors().themeColor),
         ),
         elevation: 0,
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(color: myColors().themeColor),
       ),
       body: const MessBody(),
       drawer: const NavigationDrawer(),

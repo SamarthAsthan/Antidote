@@ -1,5 +1,6 @@
 // ignore_for_file: sort_child_properties_last
 
+import 'package:antidote/constants.dart';
 import 'package:antidote/main.dart';
 import 'package:antidote/screens/complaintpage.dart';
 import 'package:antidote/screens/messmenupage.dart';
@@ -30,7 +31,7 @@ class NavigationDrawer extends StatelessWidget {
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
     return Container(
-      color: Colors.blue,
+      color: myColors().themeColor,
       child: Column(
         children: [
           CircleAvatar(

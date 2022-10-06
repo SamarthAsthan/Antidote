@@ -1,3 +1,4 @@
+import 'package:antidote/constants.dart';
 import 'package:antidote/widgets/navigationdrawer.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +9,10 @@ class Settings extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Settings"),
+        title: Text("Settings", style: TextStyle(color: myColors().themeColor)),
+        elevation: 0,
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(color: myColors().themeColor),
       ),
       drawer: NavigationDrawer(),
       body: SettingsBody(),

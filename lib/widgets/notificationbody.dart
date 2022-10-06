@@ -1,3 +1,4 @@
+import 'package:antidote/constants.dart';
 import 'package:flutter/material.dart';
 
 class NotificationBody extends StatelessWidget {
@@ -13,7 +14,13 @@ class NotificationBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(titleBody),
+        title: Text(
+          titleBody,
+          style: TextStyle(color: myColors().themeColor),
+        ),
+        iconTheme: IconThemeData(color: myColors().themeColor),
+        backgroundColor: Colors.white,
+        elevation: 0,
       ),
       body: SafeArea(
         child: SingleChildScrollView(

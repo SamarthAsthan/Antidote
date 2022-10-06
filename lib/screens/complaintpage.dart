@@ -1,3 +1,6 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:antidote/constants.dart';
 import 'package:antidote/models/complaintmodel.dart';
 import 'package:antidote/sheets/complaintsheet.dart';
 import 'package:antidote/widgets/navigationdrawer.dart';
@@ -12,11 +15,11 @@ class ComplaintsPage extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        title: const Text(
+        title: Text(
           "Complaints",
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: myColors().themeColor),
         ),
-        iconTheme: const IconThemeData(color: Colors.blue),
+        iconTheme: IconThemeData(color: myColors().themeColor),
       ),
       drawer: NavigationDrawer(),
       body: ComplaintBody(),
@@ -136,12 +139,16 @@ class _ComplaintBodyState extends State<ComplaintBody> {
                     complaint: complaintController.text.toString());
                 await UserSheetApi.insert([complainttest.toJson()]);
               },
-              icon: const Icon(
+              icon: Icon(
                 // <-- Icon
                 Icons.check,
                 size: 24.0,
               ),
               label: const Text('Done'), // <-- Text
+              style: ElevatedButton.styleFrom(
+                backgroundColor:
+                    myColors().themeColor, // This is what you need!
+              ),
             ),
           ),
         ],

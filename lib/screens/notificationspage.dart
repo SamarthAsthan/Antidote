@@ -1,3 +1,4 @@
+import 'package:antidote/constants.dart';
 import 'package:antidote/models/notificationsmodel.dart';
 import 'package:antidote/screens/signinpage.dart';
 import 'package:antidote/utils/fetcher.dart';
@@ -55,11 +56,11 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text(
           "Notifications",
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: myColors().themeColor),
         ),
         elevation: 0,
         backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.deepPurple),
+        iconTheme: IconThemeData(color: myColors().themeColor),
       ),
       body: HomeBody(),
       drawer: NavigationDrawer(),
