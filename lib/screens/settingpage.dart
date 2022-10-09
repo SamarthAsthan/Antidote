@@ -1,5 +1,6 @@
 import 'package:antidote/constants.dart';
 import 'package:antidote/widgets/navigationdrawer.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Settings extends StatelessWidget {
@@ -9,10 +10,11 @@ class Settings extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Settings", style: TextStyle(color: myColors().themeColor)),
+        title: Text("Settings",
+            style: TextStyle(color: CupertinoColors.activeBlue)),
         elevation: 0,
         backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: myColors().themeColor),
+        iconTheme: IconThemeData(color: CupertinoColors.activeBlue),
       ),
       drawer: NavigationDrawer(),
       body: SettingsBody(),
@@ -36,55 +38,58 @@ class _SettingsBodyState extends State<SettingsBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                "Select your Hostel Block",
-                style: TextStyle(fontSize: 16, color: Colors.black),
-              ),
-              DropdownButton<String>(
-                elevation: 1,
-                hint: const Text('Block'),
-                value: selectedHostel,
-                items: hostels.map(buildMenuItem).toList(),
-                onChanged: (value) {
-                  setState(() {
-                    selectedHostel = value;
-                  });
-                },
-              ),
-            ],
+    return Container(
+      color: Colors.white,
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "Select your Hostel Block",
+                  style: TextStyle(fontSize: 16, color: Colors.black),
+                ),
+                DropdownButton<String>(
+                  elevation: 1,
+                  hint: const Text('Block'),
+                  value: selectedHostel,
+                  items: hostels.map(buildMenuItem).toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      selectedHostel = value;
+                    });
+                  },
+                ),
+              ],
+            ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                "Select your Mess",
-                style: TextStyle(fontSize: 16, color: Colors.black),
-              ),
-              DropdownButton<String>(
-                elevation: 1,
-                hint: const Text('Mess'),
-                value: selectedMess,
-                items: mess.map(buildHostelItem).toList(),
-                onChanged: (value) {
-                  setState(() {
-                    selectedMess = value;
-                  });
-                },
-              ),
-            ],
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "Select your Mess",
+                  style: TextStyle(fontSize: 16, color: Colors.black),
+                ),
+                DropdownButton<String>(
+                  elevation: 1,
+                  hint: const Text('Mess'),
+                  value: selectedMess,
+                  items: mess.map(buildHostelItem).toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      selectedMess = value;
+                    });
+                  },
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

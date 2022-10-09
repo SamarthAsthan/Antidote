@@ -4,7 +4,9 @@ import 'package:antidote/screens/signinpage.dart';
 import 'package:antidote/utils/fetcher.dart';
 import 'package:antidote/widgets/navigationdrawer.dart';
 import 'package:antidote/widgets/notificationlist.dart';
+import 'package:api_cache_manager/utils/cache_manager.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -46,23 +48,43 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     _user = widget._user!;
-
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: HomeBody(),
       appBar: AppBar(
+        // ignore: prefer_const_constructors
         title: Text(
           "Notifications",
-          style: TextStyle(color: myColors().themeColor),
+          // ignore: prefer_const_constructors
+          style: TextStyle(
+              color: CupertinoColors.activeBlue, fontWeight: FontWeight.w800),
         ),
-        elevation: 0,
+        elevation: 1,
         backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: myColors().themeColor),
+        iconTheme: IconThemeData(color: CupertinoColors.activeBlue),
+        actions: [
+          IconButton(
+              onPressed: () {
+                APICacheManager().emptyCache();
+                User? user = FirebaseAuth.instance.currentUser;
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation1, animation2) =>
+                        HomePage(user: user!),
+                    transitionDuration: Duration.zero,
+                    reverseTransitionDuration: Duration.zero,
+                  ),
+                  (Route<dynamic> route) => false,
+                );
+              },
+              icon: Icon(Icons.refresh_rounded))
+        ],
       ),
-      body: HomeBody(),
       drawer: NavigationDrawer(),
     );
   }
@@ -78,33 +100,48 @@ class HomeBody extends StatefulWidget {
 class _HomeBodyState extends State<HomeBody> {
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: ReadJsonData(),
-      builder: (context, data) {
-        if (data.hasError) {
-          return Center(
-            child: Text("${data.error}"),
-          );
-        } else if (data.hasData) {
-          var items = data.data as List<NotificationsDataModel>;
-          return ListView.builder(
-            scrollDirection: Axis.vertical,
-            shrinkWrap: true,
-            itemCount: items.length,
-            itemBuilder: (BuildContext context, int index) {
-              return newlist(
-                title: items[index].title.toString(),
-                body: items[index].body.toString(),
-                priority: items[index].priority.toString(),
-                links: items[index].links.toString(),
-                source: items[index].source.toString(),
-              );
-            },
-          );
-        } else {
-          return const Center(child: CircularProgressIndicator());
-        }
-      },
+    return Container(
+      color: Colors.white,
+      child: FutureBuilder(
+        future: ReadJsonData(),
+        builder: (context, data) {
+          if (data.hasError) {
+            return Center(
+              child: Text("${data.error}"),
+            );
+          } else if (data.hasData) {
+            var items = data.data as List<NotificationsDataModel>;
+            return Column(
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount: items.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return newlist(
+                        title: items[index].title.toString(),
+                        body: items[index].body.toString(),
+                        priority: items[index].priority.toString(),
+                        links: items[index].links.toString(),
+                        source: items[index].source.toString(),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            );
+          } else {
+            return const Center(child: CupertinoActivityIndicator());
+          }
+        },
+      ),
     );
   }
 }
+
+
+/*var newl = listNotifications.where((element) => (element['Title'] != null
+        ? element['Title'].contains('samarth')
+        : false));
+    print(newl);*/

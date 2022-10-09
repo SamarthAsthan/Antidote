@@ -4,6 +4,7 @@ import 'package:antidote/constants.dart';
 import 'package:antidote/models/complaintmodel.dart';
 import 'package:antidote/sheets/complaintsheet.dart';
 import 'package:antidote/widgets/navigationdrawer.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ComplaintsPage extends StatelessWidget {
@@ -13,13 +14,14 @@ class ComplaintsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
+        elevation: 1,
         backgroundColor: Colors.white,
         title: Text(
           "Complaints",
-          style: TextStyle(color: myColors().themeColor),
+          style: TextStyle(
+              color: CupertinoColors.activeBlue, fontWeight: FontWeight.w800),
         ),
-        iconTheme: IconThemeData(color: myColors().themeColor),
+        iconTheme: IconThemeData(color: CupertinoColors.activeBlue),
       ),
       drawer: NavigationDrawer(),
       body: ComplaintBody(),
@@ -47,111 +49,113 @@ class _ComplaintBodyState extends State<ComplaintBody> {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        // ignore: prefer_const_literals_to_create_immutables
-        children: <Widget>[
-          const Padding(
-            padding: EdgeInsets.fromLTRB(10, 5, 5, 0),
-            child: Text(
-              "Register new complaint",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
-            ),
-          ),
-          const SizedBox(height: 10),
-          ListTile(
-            leading: Icon(Icons.person),
-            title: TextField(
-              controller: nameController,
-              decoration: const InputDecoration(
-                hintText: "Name",
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          // ignore: prefer_const_literals_to_create_immutables
+          children: <Widget>[
+            const Padding(
+              padding: EdgeInsets.fromLTRB(10, 10, 5, 0),
+              child: Text(
+                "Register new complaint",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
               ),
             ),
-          ),
-          const SizedBox(height: 10),
-          ListTile(
-            leading: Icon(Icons.numbers_rounded),
-            title: TextField(
-              controller: regNoController,
-              decoration: const InputDecoration(
-                hintText: "Registration Number",
-              ),
-            ),
-          ),
-          const SizedBox(height: 10),
-          ListTile(
-            leading: Icon(Icons.room_rounded),
-            title: TextField(
-              controller: roomNoController,
-              decoration: const InputDecoration(
-                hintText: "Room No",
-              ),
-            ),
-          ),
-          const SizedBox(height: 10),
-          Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20, top: 5),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  "Select Complaint Type",
-                  style: TextStyle(fontSize: 16, color: Colors.black),
+            const SizedBox(height: 10),
+            ListTile(
+              leading: Icon(Icons.person),
+              title: TextField(
+                controller: nameController,
+                decoration: const InputDecoration(
+                  hintText: "Name",
                 ),
-                DropdownButton<String>(
-                  elevation: 1,
-                  hint: const Text('Technical'),
-                  value: selectedComplaint,
-                  items: complaintType.map(buildComplaintItem).toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      selectedComplaint = value;
-                    });
-                  },
+              ),
+            ),
+            const SizedBox(height: 10),
+            ListTile(
+              leading: Icon(Icons.numbers_rounded),
+              title: TextField(
+                controller: regNoController,
+                decoration: const InputDecoration(
+                  hintText: "Registration Number",
                 ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 10),
-          ListTile(
-            title: TextField(
-              controller: complaintController,
-              decoration: const InputDecoration(
-                hintText: "Complaint in Detail",
               ),
             ),
-          ),
-          const SizedBox(height: 10),
-          Container(
-            alignment: AlignmentDirectional.center,
-            width: double.infinity,
-            child: ElevatedButton.icon(
-              onPressed: () async {
-                DateTime now = DateTime.now();
-                // ignore: prefer_const_constructors
-                final complainttest = Complaints(
-                    time: "${now.day}/${now.month}/${now.year}",
-                    regNo: regNoController.text.toUpperCase(),
-                    name: nameController.text.toUpperCase(),
-                    email: 'samarth.asthan2021@vitstudent.ac.in',
-                    roomNo: roomNoController.text.toString(),
-                    type: '$selectedComplaint',
-                    complaint: complaintController.text.toString());
-                await UserSheetApi.insert([complainttest.toJson()]);
-              },
-              icon: Icon(
-                // <-- Icon
-                Icons.check,
-                size: 24.0,
-              ),
-              label: const Text('Done'), // <-- Text
-              style: ElevatedButton.styleFrom(
-                backgroundColor:
-                    myColors().themeColor, // This is what you need!
+            const SizedBox(height: 10),
+            ListTile(
+              leading: Icon(Icons.room_rounded),
+              title: TextField(
+                controller: roomNoController,
+                decoration: const InputDecoration(
+                  hintText: "Room No",
+                ),
               ),
             ),
-          ),
-        ],
+            const SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.only(left: 20, right: 20, top: 5),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    "Select Complaint Type",
+                    style: TextStyle(fontSize: 16, color: Colors.black),
+                  ),
+                  DropdownButton<String>(
+                    elevation: 1,
+                    hint: const Text('Technical'),
+                    value: selectedComplaint,
+                    items: complaintType.map(buildComplaintItem).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        selectedComplaint = value;
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 10),
+            ListTile(
+              title: TextField(
+                controller: complaintController,
+                decoration: const InputDecoration(
+                  hintText: "Complaint in Detail",
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            Container(
+              alignment: AlignmentDirectional.center,
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                onPressed: () async {
+                  DateTime now = DateTime.now();
+                  // ignore: prefer_const_constructors
+                  final complainttest = Complaints(
+                      time: "${now.day}/${now.month}/${now.year}",
+                      regNo: regNoController.text.toUpperCase(),
+                      name: nameController.text.toUpperCase(),
+                      email: 'samarth.asthan2021@vitstudent.ac.in',
+                      roomNo: roomNoController.text.toString(),
+                      type: '$selectedComplaint',
+                      complaint: complaintController.text.toString());
+                  await UserSheetApi.insert([complainttest.toJson()]);
+                },
+                icon: Icon(
+                  // <-- Icon
+                  Icons.check,
+                  size: 24.0,
+                ),
+                label: const Text('Done'), // <-- Text
+                style: ElevatedButton.styleFrom(
+                  backgroundColor:
+                      CupertinoColors.activeBlue, // This is what you need!
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

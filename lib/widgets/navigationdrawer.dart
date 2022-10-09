@@ -7,6 +7,7 @@ import 'package:antidote/screens/messmenupage.dart';
 import 'package:antidote/screens/settingpage.dart';
 import 'package:antidote/screens/signinpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class NavigationDrawer extends StatelessWidget {
@@ -31,7 +32,7 @@ class NavigationDrawer extends StatelessWidget {
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
     return Container(
-      color: myColors().themeColor,
+      color: CupertinoColors.activeBlue,
       child: Column(
         children: [
           CircleAvatar(
@@ -77,7 +78,7 @@ class NavigationDrawer extends StatelessWidget {
             title: const Text("Mess Menu"),
             onTap: () {
               //Navigator.pop(context);
-              Navigator.of(context).push(
+              Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (context) => const MessMenu()));
             },
           ),
@@ -86,7 +87,7 @@ class NavigationDrawer extends StatelessWidget {
             title: const Text("Complaints"),
             onTap: () {
               //Navigator.pop(context);
-              Navigator.of(context).push(
+              Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (context) => ComplaintsPage()));
             },
           ),
@@ -95,7 +96,7 @@ class NavigationDrawer extends StatelessWidget {
             title: const Text("Settings"),
             onTap: () {
               //Navigator.pop(context);
-              Navigator.of(context).push(
+              Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (context) => const Settings()));
             },
           ),
@@ -127,7 +128,7 @@ class NavigationDrawer extends StatelessWidget {
 
               _signOut();
               //Navigator.pop(context);
-              Navigator.of(context).push(
+              Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (context) => SignInScreen()));
             },
           )

@@ -2,6 +2,7 @@
 
 import 'package:antidote/constants.dart';
 import 'package:antidote/widgets/notificationbody.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class newlist extends StatelessWidget {
@@ -18,26 +19,25 @@ class newlist extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       child: Card(
-        elevation: 5.0,
-        margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+        elevation: 4.0,
+        margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
         child: Container(
           decoration: BoxDecoration(color: Colors.white),
           child: ListTile(
               contentPadding:
                   EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
               leading: Container(
-                padding: EdgeInsets.only(right: 12.0),
                 decoration: new BoxDecoration(
                     border: new Border(
-                        right:
-                            new BorderSide(width: 1.0, color: Colors.white24))),
+                        right: new BorderSide(
+                            width: 10.0, color: Colors.white24))),
                 child: Icon(Icons.notifications_none_rounded,
-                    color: myColors().themeColor),
+                    color: CupertinoColors.activeBlue),
               ),
               title: Text(
                 "$title ",
                 style:
-                    TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                    TextStyle(color: Colors.black, fontWeight: FontWeight.w700),
               ),
               // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
 
@@ -51,7 +51,7 @@ class newlist extends StatelessWidget {
                       height: 8,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Colors.red,
+                        color: CupertinoColors.systemRed,
                       ),
                     ),
                     Padding(

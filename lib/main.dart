@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
     bool isLoggedIn = FirebaseAuth.instance.currentUser != null ? true : false;
     if (isLoggedIn) {
       return MaterialApp(
+        //theme: ThemeData(fontFamily: "SAMARTH"),
         debugShowCheckedModeBanner: false,
         home: HomePage(
           user: user!,

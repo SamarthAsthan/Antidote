@@ -22,6 +22,6 @@ var credentials = r'''
 }
 ''';
 
-class myColors {
+/*class myColors {
   final Color themeColor = Color.fromARGB(255, 0, 121, 251);
-}
+}*/

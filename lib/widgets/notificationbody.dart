@@ -1,4 +1,5 @@
 import 'package:antidote/constants.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class NotificationBody extends StatelessWidget {
@@ -16,49 +17,53 @@ class NotificationBody extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           titleBody,
-          style: TextStyle(color: myColors().themeColor),
+          style: TextStyle(color: CupertinoColors.activeBlue),
         ),
-        iconTheme: IconThemeData(color: myColors().themeColor),
+        iconTheme: IconThemeData(color: CupertinoColors.activeBlue),
         backgroundColor: Colors.white,
         elevation: 0,
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                Text(
-                  bodyBody,
-                  style: const TextStyle(
-                      fontSize: 18,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w500),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Link- $linkBody',
-                      style: const TextStyle(
-                          fontSize: 15,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w700),
-                    ),
-                    Text(
-                      'Source- $sourceBody',
-                      textAlign: TextAlign.start,
-                      style: const TextStyle(
-                          fontSize: 15,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w800),
-                    )
-                  ],
-                ),
-              ],
+        child: Container(
+          height: double.infinity,
+          color: Colors.white,
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  Text(
+                    bodyBody,
+                    style: const TextStyle(
+                        fontSize: 18,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Link- $linkBody',
+                        style: const TextStyle(
+                            fontSize: 15,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w700),
+                      ),
+                      Text(
+                        'Source- $sourceBody',
+                        textAlign: TextAlign.start,
+                        style: const TextStyle(
+                            fontSize: 15,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w800),
+                      )
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
