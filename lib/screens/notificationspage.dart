@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:antidote/constants.dart';
 import 'package:antidote/models/notificationsmodel.dart';
 import 'package:antidote/screens/signinpage.dart';
@@ -85,19 +87,14 @@ class _HomePageState extends State<HomePage> {
               icon: Icon(Icons.refresh_rounded))
         ],
       ),
-      drawer: NavigationDrawer(),
+      drawer: const NavigationDrawer(),
     );
   }
 }
 
-class HomeBody extends StatefulWidget {
+class HomeBody extends StatelessWidget {
   const HomeBody({super.key});
 
-  @override
-  State<HomeBody> createState() => _HomeBodyState();
-}
-
-class _HomeBodyState extends State<HomeBody> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -132,14 +129,26 @@ class _HomeBodyState extends State<HomeBody> {
               ],
             );
           } else {
-            return const Center(child: CupertinoActivityIndicator());
+            return SizedBox(
+                width: double.infinity,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  // ignore: prefer_const_literals_to_create_immutables
+                  children: [
+                    CupertinoActivityIndicator(),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text("Loading Notifications"),
+                    )
+                  ],
+                ));
           }
         },
       ),
     );
   }
 }
-
 
 /*var newl = listNotifications.where((element) => (element['Title'] != null
         ? element['Title'].contains('samarth')

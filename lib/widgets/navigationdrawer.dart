@@ -6,6 +6,7 @@ import 'package:antidote/screens/complaintpage.dart';
 import 'package:antidote/screens/messmenupage.dart';
 import 'package:antidote/screens/settingpage.dart';
 import 'package:antidote/screens/signinpage.dart';
+import 'package:api_cache_manager/api_cache_manager.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -120,6 +121,9 @@ class NavigationDrawer extends StatelessWidget {
             leading: const Icon(Icons.logout_rounded),
             title: const Text("Log Out"),
             onTap: () async {
+              Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => SignInScreen()));
+
               Future<SignInScreen> _signOut() async {
                 await FirebaseAuth.instance.signOut();
 
@@ -127,9 +131,7 @@ class NavigationDrawer extends StatelessWidget {
               }
 
               _signOut();
-              //Navigator.pop(context);
-              Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => SignInScreen()));
+              APICacheManager().emptyCache();
             },
           )
         ],

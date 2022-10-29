@@ -16,11 +16,13 @@ Future<List<NotificationsDataModel>> ReadJsonData() async {
     var response = await http.get(Uri.parse(urlNotifications));
     if (response.statusCode == 200) {
       APICacheDBModel cacheDBModel =
-          new APICacheDBModel(key: "Notify", syncData: response.body);
+          APICacheDBModel(key: "Notify", syncData: response.body);
       await APICacheManager().addCacheData(cacheDBModel);
       var newsList = json.decode(response.body) as List<dynamic>;
       print("API-Hit");
-      return newsList.map((e) => NotificationsDataModel.fromJson(e)).toList();
+      return newsList.reversed
+          .map((e) => NotificationsDataModel.fromJson(e))
+          .toList();
     } else {
       return newsList;
     }
@@ -29,6 +31,8 @@ Future<List<NotificationsDataModel>> ReadJsonData() async {
     var newsList = json.decode(cacheData.syncData) as List<dynamic>;
     print("Cache-Hit");
 
-    return newsList.map((e) => NotificationsDataModel.fromJson(e)).toList();
+    return newsList.reversed
+        .map((e) => NotificationsDataModel.fromJson(e))
+        .toList();
   }
 }

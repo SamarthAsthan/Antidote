@@ -19,7 +19,20 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16.0),
       child: _isSigningIn
-          ? CupertinoActivityIndicator(animating: true, radius: 10)
+          ? SizedBox(
+              width: double.infinity,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                // ignore: prefer_const_literals_to_create_immutables
+                children: [
+                  CupertinoActivityIndicator(),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text("Please wait"),
+                  )
+                ],
+              ))
           : OutlinedButton(
               style: ButtonStyle(
                 backgroundColor:
